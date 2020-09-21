@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+
+
+        <record id="construction" model="ir.module.category">
+            <field name="name"></field>
+            <field name="" eval="1"/>
+        </record>
+        <record id="group_" model="res.groups">
+            <field name="name"></field>
+            <field name="category_id" ref=""/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+
+
+    </data>
+</odoo>
