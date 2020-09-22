@@ -1,0 +1,72 @@
+<odoo>
+    <data>
+
+        <record id="website_e_wallet_bankwriteoff_view_tree" model="ir.ui.view">
+            <field name="name">台銀銷帳檔</field>
+            <field name="model">website.e.wallet.bankwriteoff</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="state"/>
+                    <field name="company_id"/>
+                    <field name="partner_id"/>
+                    <field name="name"/>
+                    <field name="rcptid"/>
+                    <field name="curamt"/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="website_e_wallet_bankwriteoff_view_form" model="ir.ui.view">
+            <field name="name">台銀銷帳檔 Form</field>
+            <field name="model">website.e.wallet.bankwriteoff</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_add_website_transactions" states="draft,assigned" type="object" string="確認銷帳" class="oe_highlight"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group col="4">
+                            <field name="partner_id"/>
+                            <field name="transaction_id"/>
+                            <field name="company_id"/>
+                            <field name="wallet_id"/>
+                            <field name="name"/>
+                            <field name="system"/>
+                            <field name="trndt"/>
+                            <field name="trntime"/>
+                            <field name="rcptid"/>
+                            <field name="curamt"/>
+                            <field name="code"/>
+                            <field name="userdata"/>
+                            <field name="cname"/>
+                            <field name="pname"/>
+                            <field name="trntype"/>
+                            <field name="sitdate"/>
+                            <field name="cllbr"/>
+
+                        </group>
+                        <group>
+                            <field name="xml"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="website_e_wallet_bankwriteoff_action">
+            <field name="name">台銀銷帳資料</field>
+            <field name="res_model">website.e.wallet.bankwriteoff</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="台銀銷帳資料"
+                id="website_wallet_bankwriteoff"
+                parent="odoo_e_wallet.website_wallet_main_menu"
+                action="website_e_wallet_bankwriteoff_action"
+                sequence="30"
+            />
+
+    </data>
+</odoo>

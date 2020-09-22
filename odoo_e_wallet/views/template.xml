@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+      <!-- Copyright (c) 2017-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+      <!-- See LICENSE file for full copyright and licensing details. -->
+        <template name="odoo_e_wallet_assets" id="odoo_e_wallet_assets" inherit_id="website.assets_frontend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/odoo_e_wallet/static/src/js/odoo_e_wallet.js"></script>
+                <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script> -->
+                <link rel="stylesheet" href="/odoo_e_wallet/static/src/css/odoo_e_wallet.css"></link>
+            </xpath>
+        </template>
+
+        <template id="inherit_portal_my_home" inherit_id="portal.portal_my_home">
+            <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+              <t t-set="login_partner" t-value="website.get_login_partner()"/>
+              <t t-if="website.sudo().is_wallet_active() and website.sudo().get_wallet_details(login_partner) > 0">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="title">Wallet</t>
+                    <t t-set="url" t-value="'/main/wallet'"/>
+                    <t t-set="count" t-value="website.sudo().get_wallet_details(login_partner)" t-if="website.sudo().is_transactions_active()"/>
+                </t>
+              </t>
+            </xpath>
+        </template>
+
+        <template id="inherit_website_sale_payment" inherit_id="website_sale.payment">
+            <xpath expr="//div[@id='payment_method']" position="before">
+              <t t-if="show_wallet and is_wallet_active">
+                <h3 class="mb24">Wallet</h3>
+                <div id="wallet_payment" class="card" style="width: 100%">
+                    <div class="card-body">
+                      <div class="checkbox js_render">
+                          <label>
+                              <input type="checkbox" value="" id="pay_using_wallet"></input>
+                              <b>Pay Using E-Wallet</b>
+                               <span class="badge badge-secondary js_wallet_bal">
+                                <t t-set="w_amount" t-value="website.sale_get_order().wallet_debit"/>
+                                <span id="wallet_bal" t-esc="w_amount"
+                                  t-options='{
+                                             "widget": "monetary",
+                                             "display_currency": website.currency_id
+                                        }'
+                                  ></span>
+                              </span>
+                          </label>
+                      </div>
+                      <b class="total-w-text">Your current E-Wallet balance is</b>
+                      <span class="badge badge-primary">
+                        <span id="total_wallet_bal" t-field="request.env.user.partner_id.wallet_credit"
+                          t-options='{
+                                     "widget": "monetary",
+                                     "from_currency": website.get_users_currency(request.env.user.partner_id),
+                                     "display_currency": website.get_current_pricelist().currency_id
+                                }'
+                          ></span>
+                      </span>
+                  </div>
+                </div>
+              </t>
+            </xpath>
+
+        </template>
+
+        <template id="search">
+          <!-- <t t-call="portal.portal_layout"> -->
+
+            <div class="wk-main-search mt24">
+              <div class="wk-search">
+                <form action="/main/wallet" method="get">
+                  <div class="input-group ">
+                    <div class="form-group">
+                      <select id="wallet_selection" name="selection" class="btn btn-secondary wk-height">
+                        <option value="sale_order">Sale Order</option>
+                        <option value="transaction_id">Transaction Id</option>
+                        <option value="all">Reset</option>
+                      </select>
+                    </div>
+                    <input t-att-value="search" id="wk_input" name="search" type="text" class="form-control wk-height"/>
+                    <button type="submit" class="btn btn-secondary wk-height" aria-label="Search" title="Search"><i class="fa fa-search"/></button>
+                  </div>
+                </form>
+              </div>
+            <div class="wk-inline wk-sort">
+              <div class="dropdown">
+                <span>Sort By:</span>
+                <button class="dropdown-toggle btn btn-secondary wk-height" type="button" data-toggle="dropdown">
+                  <t t-esc="searchbar_sortings[sortby].get('label', 'Newest')"/>
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <t t-foreach="searchbar_sortings" t-as="option">
+                      <li><a t-att-href="request.httprequest.path + '?' + keep_query('*', sortby=option)"
+                         t-attf-class="dropdown-item#{sortby == option and ' active' or ''}">
+                          <span t-esc="searchbar_sortings[option].get('label')"/>
+                      </a></li>
+                  </t>
+                </ul>
+            </div>
+            </div>
+            </div>
+          <!-- </t> -->
+        </template>
+
+        <template id="main_wallet" name="Wallet page">
+          <link type="image/x-icon" rel="shortcut icon" t-att-href="x_icon or '/web/static/src/img/favicon.ico'"/>
+          <div id="wk-transactions">
+            <t t-call="portal.portal_layout">
+              <div class="col-md-12 ">
+                <div class="row main-wallet align-items-center">
+                  <div class="col-md-5">
+                    <t t-set="image" t-value="request.website._get_current_wallet().image"/>
+                    <span class="wallet_image" t-if="image" t-esc="image" t-options="{'widget': 'image', 'resize': '300x300'}"/>
+                    <img t-if="not image" class="img img-fluid image" t-att-alt="Wallet" t-attf-src="/odoo_e_wallet/static/img/icon-wallet.png"/>
+                  </div>
+                  <div class="col-md-7 text-center">
+                    <span class="wallet-heading">Amount In Your <strong t-esc="wallet.name"/></span>
+                    <div class="wallet">
+                      <div class="single-amount" t-field="request.env.user.partner_id.wallet_credit"
+                        t-if="website.get_current_pricelist().currency_id == request.env.user.partner_id.company_id.currency_id"
+                        t-options='{
+                                   "widget": "monetary",
+                                   "from_currency":website.get_users_currency(request.env.user.partner_id),
+                                   "display_currency": website.currency_id
+                              }'
+                        />
+                      <div class="double-amount" t-if="website.get_current_pricelist().currency_id != request.env.user.partner_id.company_id.currency_id">
+                        <span class="wallet-amount" t-field="request.env.user.partner_id.wallet_credit"
+                          t-options='{
+                                     "widget": "monetary",
+                                     "from_currency":website.get_users_currency(request.env.user.partner_id),
+                                     "display_currency": request.env.user.partner_id.company_id.currency_id
+                                }'
+                          />
+                          <span class="wallet-sep">|</span>
+                          <span class="wallet-amount two" t-field="request.env.user.partner_id.wallet_credit"
+                          t-options='{
+                                     "widget": "monetary",
+                                     "from_currency": website.get_users_currency(request.env.user.partner_id),
+                                     "display_currency": website.get_current_pricelist().currency_id
+                                }'
+                          />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <t t-if="show_transactions">
+                <!-- <t t-set="breadcrumbs_searchbar" t-value="True"/> -->
+                <!-- <t t-call="portal.portal_searchbar">
+                  <t t-set="title">Wallet Transactions</t>
+                </t> -->
+                <t t-call="odoo_e_wallet.search"/>
+                <t t-if="not wallet_transaction_ids">
+                  <div class="text-center bg-info wk_warning">
+                    <p class="wk_text">There are currently no transactions.</p>
+                  </div>
+                </t>
+                <t t-if="wallet_transaction_ids" t-call="portal.portal_table">
+                  <thead>
+                      <tr class="active">
+                          <th class="text-left">Transaction ID</th>
+                          <th class="text-center">Sale Order ID</th>
+                          <th class="text-center">Wallet Name</th>
+                          <th class="text-center">Tags</th>
+                          <th class="text-center">Date</th>
+                          <th class="text-center">Type</th>
+                          <th class="text-center">State</th>
+                          <th class="text-center">Total</th>
+                          <!-- <th class="text-right">Total Amount</th> -->
+                      </tr>
+                  </thead>
+                  <t t-foreach="wallet_transaction_ids" t-as="transaction" t-if="not( transaction.txn_type == 'credit' and transaction.state in ['cancelled','draft'])">
+                    <tr>
+                        <td class="text-left"><span t-esc="transaction.transaction_id"/></td>
+                        <td class="text-center">
+                          <span t-esc="transaction.sudo().sale_order_id.name"/>
+                          <span t-if="not transaction.sale_order_id">-</span>
+                        </td>
+                        <td class="text-center"><span t-esc="transaction.wallet_id.name"/></td>
+                        <!-- <td class="text-left"><span t-field="transaction.sale_order_id.name"/></td> -->
+                        <td class="text-center"><span t-esc="','.join(transaction.tag_ids.mapped('name'))"/></td>
+                        <td class="text-center"><span t-esc="transaction.transaction_datetime" t-options='{"widget": "date"}'/></td>
+                        <td class="text-center">
+                          <span t-if="transaction.txn_type == 'credit'" class="badge badge-pill badge-primary"><i class="fa fa-check"/> Credit</span>
+                          <span t-if="transaction.txn_type == 'debit'" class="badge badge-pill badge-secondary"><i class="fa fa-remove"/> Debit</span>
+                        </td>
+                        <td class="text-center">
+                            <span t-if="transaction.state == 'draft'" class="badge badge-pill badge-secondary"><i class="fa fa-remove"/> Draft</span>
+                            <span t-if="transaction.state == 'done'" class="badge badge-pill badge-success"><i class="fa fa-check"/> Done</span>
+                            <span t-if="transaction.state == 'cancelled'" class="badge badge-pill badge-danger"><i class="fa fa-remove"/>Cancelled</span>
+                            <span t-if="transaction.state == 'refunded'" class="badge badge-pill badge-info"><i class="fa fa-check"/>Refunded</span>
+                        </td>
+                        <td class="text-center">
+                            <span t-esc="transaction.amount"
+                              t-options='{
+                                         "widget": "monetary",
+                                         "display_currency": transaction.currency_id
+                                    }'
+                              />
+                        </td>
+                        <!-- <td class="text-right">
+                            <span t-field="transaction.total_amount"
+                              t-options='{
+                                         "widget": "monetary",
+                                         "display_currency": website.get_users_currency(request.env.user.partner_id)
+                                    }'
+                              />
+                        </td> -->
+                    </tr>
+                  </t>
+                </t>
+              </t>
+            </t>
+          </div>
+        </template>
+
+        <template id="inherit_wallet_payment" name="Inherit_wallet_payment" inherit_id="website_sale.total">
+            <xpath expr="//div//tr[@id='order_total']" position="before">
+                <t t-if="website.sudo().is_wallet_active() and website_sale_order.wallet_debit > 0">
+                    <t t-set="currency" t-value="website.get_current_pricelist().currency_id"/>
+                    <t t-set="cart_amount" t-value="(website_sale_order.wallet_debit)"/>
+                    <tr class="" id="wallet_amount">
+                        <td class="text-right noborder">E-Wallet:</td>
+                        <td class="text-xl-right noborder">
+                            <span>-</span>
+                            <!-- <span t-esc="currency.symbol" t-if="currency.position == 'before'"/> -->
+                            <span id="wallet_amount" t-esc="round(cart_amount,2)" style="white-space:   nowrap;" t-options='{"widget": "monetary", "display_currency": website_sale_order.pricelist_id.currency_id}'/>
+                            <!-- <span t-esc="currency.symbol" t-if="currency.position == 'after'"/> -->
+                        </td>
+                    </tr>
+                </t>
+            </xpath>
+            <xpath expr="//div//tr[@id='order_total']" position="attributes">
+                <attribute name="t-att-class">'d-none' if website_sale_order.wallet_debit > 0 else ''</attribute>
+            </xpath>
+            <xpath expr="//div//tr[@id='order_total']" position="after">
+                <tr id="order_total" t-if="website_sale_order.wallet_debit > 0">
+                    <t t-set="currency" t-value="website.get_current_pricelist().currency_id"/>
+                    <td class="text-right"><strong>Total:</strong></td>
+                    <td class="text-xl-right">
+                        <strong>
+                            <!-- <span t-esc="currency.symbol" t-if="currency.position == 'before'"/> -->
+                            <span t-esc="round(website_sale_order.amount_total - website_sale_order.wallet_debit, 2)" style="white-space: nowrap;" t-options='{"widget": "monetary", "display_currency": website_sale_order.pricelist_id.currency_id}'/>
+                            <!-- <span t-esc="currency.symbol" t-if="currency.position == 'after'"/> -->
+                        </strong>
+                    </td>
+                </tr>
+            </xpath>
+        </template>
+
+        <template id="wallet_transaction_wallet" inherit_id="website_sale.confirmation" name="wallet_website_sale_confirmation_Wallet">
+            <!-- <xpath expr="//div[@id='wrap']//div[@class='oe_cart']/t[4]" position="replace">
+                <t t-call="website_sale.payment_confirmation_status" t-if="order.get_portal_last_transaction().acquirer_id"/>
+                <t t-if="order.wallet_debit > 0 and order.amount_total == 0">
+                    <p class="bg-info wk_confirmation">Paid using E-Wallet :
+                        <span class="wk_confirmation_amount" t-esc="order.wallet_debit" t-options='{"widget":"monetary","display_currency": order.pricelist_id.currency_id}'/>
+                    </p>
+                    <p class="wk_message">
+                        <span><b>Pending...</b> The Order will be validated after the payment confirmation</span>
+                    </p>
+                </t>
+            </xpath> -->
+            <xpath expr="//div[@id='wrap']//table[hasclass('table')]//strong[@t-field='order.amount_total']" position="replace">
+                <!-- <t t-set="acquirer_id" t-value="order.get_portal_last_transaction().acquirer_id"/> -->
+                <!-- <t t-if="acquirer_id.provider != 'e_wallet'"> -->
+                <t t-if="order.wallet_debit != order.amount_total">
+                    <t t-set="currency" t-value="order.pricelist_id.currency_id"/>
+                    <strong class="abc">
+                        <span t-esc="currency.symbol" t-if="currency.position == 'before'"/>
+                        <span t-esc="round(order.amount_total - order.wallet_debit, 2)" style="white-space: nowrap;"/>
+                        <span t-esc="currency.symbol" t-if="currency.position == 'after'"/>
+                    </strong>
+                </t>
+                <t t-else="">
+                    <strong t-field="order.amount_total" t-options="{'widget': 'monetary', 'display_currency': order.pricelist_id.currency_id}" />
+                </t>
+            </xpath>
+            <xpath expr="//div[@id='wrap']//table[hasclass('table')]//tr[1]" position="after">
+                <t t-if="order.wallet_debit > 0 and order.wallet_debit != order.amount_total ">
+                    <tr>
+                        <td colspan="2">
+                            <p>E-Wallet</p>
+                        </td>
+                        <td class="text-right" width="100">
+                            <strong>Total:</strong>
+                        </td>
+                        <td class="text-right" width="100">
+                            <strong t-field="order.wallet_debit" t-options="{'widget': 'monetary', 'display_currency': order.pricelist_id.currency_id}" />
+                        </td>
+                    </tr>
+                </t>
+            </xpath>
+        </template>
+
+        <template id="inherit_wallet_sale_order_portal_content" name="sale_order_portal_content_inherit" inherit_id="sale.sale_order_portal_content">
+          <xpath expr="//div[@id='total']//tr[hasclass('border-black')][2]" position="before">
+            <t t-set="is_wallet_active" t-value="website.sudo().is_wallet_active()"/>
+            <tr t-if="is_wallet_active and sale_order.wallet_debit > 0">
+              <td><strong>E-Wallet</strong></td>
+              <td class="text-right">
+                <span>(-)</span>
+                <span data-id="sale_wallet_amount" t-field="sale_order.wallet_debit" t-options='{"widget": "monetary", "display_currency": sale_order.pricelist_id.currency_id}'/>
+              </td>
+            </tr>
+          </xpath>
+        </template>
+
+        <template id="inherit_wallet_report_invoice_document" name="report_invoice_document" inherit_id="account.report_invoice_document">
+          <xpath expr="//div[@id='total']/.." position="before">
+            <t t-set="is_wallet_active" t-value="request.website.sudo().is_wallet_active()"/>
+            <p t-set="order" t-value="o.get_wallet_order()"/>
+            <t t-set="currency" t-value="order.wallet_txn_id.currency_id"/>
+            <t t-if="is_wallet_active and order.wallet_debit > 0">
+              <div id="wallet">
+                <strong>E-Wallet:</strong>
+                <span>(-)</span>
+                <span class="invoice-wallet">
+                  <span t-esc="currency.symbol" t-if="currency.position == 'before'"/>
+                  <span t-esc="round(order.wallet_debit,2)"/>
+                  <span t-esc="currency.symbol" t-if="currency.position == 'after'"/>
+              </span>
+              </div>
+            </t>
+          </xpath>
+        </template>
+
+        <template id="inherit_wallet_report_saleorder_document" name="report_saleorder_document" inherit_id="sale.report_saleorder_document">
+          <xpath expr="//div[@name='total']//tr[hasclass('border-black')][2]" position="before">
+            <t t-if="doc.wallet_debit > 0">
+              <td><strong>E-Wallet</strong></td>
+              <td class="text-right">
+                  <span>-</span>
+                  <span data-id="report_wallet_amount" t-field="doc.wallet_debit" t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
+              </td>
+            </t>
+          </xpath>
+          <!-- <xpath expr="//div[@name='total']//tr[hasclass('border-black')][2]//span" position="replace">
+              <t t-set="amount_total" t-value="doc.amount_total - doc.wallet_debit"/>
+              <span t-esc="amount_total" t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
+          </xpath> -->
+        </template>
+
+        <!-- <template id="inherit_wallet_payment_tokens_list" inherit_id="payment.payment_tokens_list">
+          <xpath expr="//t[@t-foreach='acquirers']" position="attributes">
+            <attribute name="t-if">acq.provider != 'e_wallet' or show_wallet</attribute>
+          </xpath>
+          <xpath expr="//div[hasclass('card-body')][1]" position="attributes">
+            <attribute name="t-att-class">'card-body d-none' if acq.provider == 'e_wallet' else 'card-body'</attribute>
+          </xpath>
+        </template> -->
+
+        <template id="wk_wallet_amount_total">
+            <tr id="order_total_w">
+                <td class="text-right"><b>Total:</b></td>
+                <td class="text-xl-right">
+                    <b t-esc='amount' t-options='{"widget": "monetary", "display_currency": currency_id}'/>
+                </td>
+            </tr>
+        </template>
+
+        <template id="wk_wallet_amount">
+            <tr id="wallet_tr">
+                <td class="text-right noborder">E-wallet:</td>
+                <td class="text-xl-right noborder">
+                    <span>-</span>
+                    <span t-esc='wallet_amount' t-options='{"widget": "monetary", "display_currency": currency_id}'/>
+                </td>
+            </tr>
+        </template>
+
+        <template id="wk_wallet_used_amount">
+            <span id="wallet_bal" t-esc='wallet_bal' t-options='{"widget": "monetary", "display_currency": currency_id}'/>
+        </template>
+
+        <template id="inherit_payment_tokens_list" inherit_id="payment.payment_tokens_list">
+            <xpath expr="//div[hasclass('card')]/t/div[hasclass('card-body','o_payment_acquirer_select')]" position="attributes">
+                <attribute name="t-att-class">'card-body o_payment_acquirer_select d-none' if acq.provider == 'e_wallet' else 'card-body o_payment_acquirer_select'</attribute>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

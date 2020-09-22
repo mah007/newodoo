@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+      <!-- Copyright (c) 2017-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+      <!-- See LICENSE file for full copyright and licensing details. -->
+        <record id="inherit_website_wallet_extend_partner_view" model="ir.ui.view">
+            <field name="name">inherit_website_wallet_extend_partner_form_view</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='vat']" position="after">
+                    <field name="wallet_virtualaccount" attrs="{ 'readonly' : True }"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

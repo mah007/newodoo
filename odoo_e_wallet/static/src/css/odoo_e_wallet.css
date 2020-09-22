@@ -1,0 +1,180 @@
+/* Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) */
+/* See LICENSE file for full copyright and licensing details. */
+.main-wallet {
+  padding-top: 20px;
+}
+.wallet {
+  /* padding-left: 4%; */
+  /* text-align: center; */
+  /* padding:0 44px; */
+}
+.image {
+  position: relative;
+  left: 23%;
+}
+.wallet-heading {
+  font-family: 'Arail Bold';
+  font-weight: bolder;
+  font-size: 40px;
+  display: block;
+  color: #333333;
+}
+.wallet-amount, .wallet-sep, .single-amount {
+  color: #3c6722;
+  font-weight: bolder;
+  font-size: 40px;
+  display: inline-block;
+}
+.wallet-currency {
+  font-family: 'Arail Bold';
+  color: #3c6722;
+  font-weight: bolder;
+  font-size: 40px;
+}
+.invoice-wallet {
+  padding-left: 20px;
+}
+.single-amount {
+  /* padding: 0 15%; */
+}
+.double-amount {
+  /* padding: 0 32px; */
+}
+.two {
+  color: #3c52a2;
+}
+.wk_warning{
+  padding: 18px;
+  margin-top: 10px;
+}
+.wk_text{
+  font-size: 16px;
+  margin: 0;
+}
+.wk-search{
+  /* margin-bottom: 10px;
+  background-color: #645c5c0d;
+  padding:1px 0; */
+  float: right;
+  display: inline-block;
+  width: 50%;
+}
+.wk_home{
+  padding:6px 20px;
+}
+.wk-float{
+  float: right;
+}
+.wk-inline{
+  display: inline-block;
+}
+.wk-sort{
+
+}
+.wk-height{
+  height: 36px;
+}
+.wk-main-search{
+  padding: 3px 0;
+  background-color: #c5c1c117;
+  margin-top: 6px;
+}
+#wk-transactions .form-group,form{
+  margin: 0px;
+}
+.total-w-text{
+  color: #2d262699;
+}
+.wk_confirmation{
+  padding: 20px;
+  font-weight: bolder;
+  border-radius: 3px;
+}
+.wk_confirmation_amount{
+  float: right;
+}
+#payment_method .a-submit span{
+  color: white;
+}
+#loader {
+  position: fixed;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+  display: none;
+}
+.wk_message{
+  background-color:#b4aaab2e;
+  padding:10px;
+}
+.wk_message span{
+  font-style: italic;
+}
+.main-wallet > .col-md-4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wallet_image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 3px;
+}
+.js_add_msg {
+  padding: 6px 4px;
+  margin-top: 9px;
+  font-weight: bold;
+  border-radius: 3px;
+}
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@media only screen and (max-width: 769px) {
+  .wallet-heading, .double-amount, .single-amount {
+    text-align: center;
+  }
+  .image {
+    display: block;
+    margin: 0 auto;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .image {
+    position: unset;
+  }
+  .wk-search{
+    width:80%;
+  }
+}
+@media only screen and (max-width: 552px) {
+  .wk-search{
+    width:85%;
+  }
+}
+@media only screen and (max-width: 770px) {
+  .wk-search{
+    width:70%;
+  }
+}
+@media only screen and (max-width: 552px) {
+  .wk-sort{
+    float: right;
+  }
+  .wk-search{
+    width:100%;
+  }
+}

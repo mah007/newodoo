@@ -1,0 +1,903 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* odoo_e_wallet
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-05-27 03:12+0000\n"
+"PO-Revision-Date: 2020-06-05 09:33+0800\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 2.3.1\n"
+"Last-Translator: \n"
+"Language: zh_TW\n"
+
+#. module: odoo_e_wallet
+#: model:mail.template,body_html:odoo_e_wallet.website_wallet_mail_credit_template
+msgid ""
+"\n"
+"                \n"
+"                    Congratulations <b>${object.partner_id.name},</"
+"b><br><br>\n"
+"                    Your Wallet is credited with amount <b>"
+"${format_amount(object.amount, object.currency_id)}</b><br>\n"
+"                    Tags: <b>${', '.join(object.tag_ids.mapped('name'))}</"
+"b><br>\n"
+"                    Total Amount in Wallet <b>\n"
+"                      ${format_amount(object.wallet_id.company_id."
+"currency_id.compute(\n"
+"                      object.partner_id.wallet_credit, object.env['res."
+"users'].search([('partner_id','=',object.partner_id.id)]).company_id."
+"currency_id), object.env['res.users'].search([('partner_id','=',object."
+"partner_id.id)]).company_id.currency_id)}</b><br><br>\n"
+"                    <br>\n"
+"                    Regards<br>\n"
+"                    ${object.env.user.name}\n"
+"                \n"
+"            "
+msgstr ""
+"\n"
+"                \n"
+"                    恭喜你<b>${object.partner_id.name},</b><br><br>\n"
+"                    您的錢包被存款金額 <b>${format_amount(object.amount, "
+"object.currency_id)}</b><br>\n"
+"                    標籤: <b>${', '.join(object.tag_ids.mapped('name'))}</"
+"b><br>\n"
+"                    錢包中的總金額 <b>\n"
+"                      ${format_amount(object.wallet_id.company_id."
+"currency_id.compute(\n"
+"                      object.partner_id.wallet_credit, object.env['res."
+"users'].search([('partner_id','=',object.partner_id.id)]).company_id."
+"currency_id), object.env['res.users'].search([('partner_id','=',object."
+"partner_id.id)]).company_id.currency_id)}</b><br><br>\n"
+"                    <br>\n"
+"                    敬啓<br>\n"
+"                    ${object.env.user.name}\n"
+"                \n"
+"            "
+
+#. module: odoo_e_wallet
+#: model:mail.template,body_html:odoo_e_wallet.website_wallet_mail_manual_debit_template
+msgid ""
+"\n"
+"                \n"
+"                    Dear <b>${object.partner_id.name},</b><br><br>\n"
+"                    Your Wallet is Debited with amount <b>"
+"${format_amount(object.currency_id.round(object.amount), object."
+"currency_id)}\n"
+"                    </b><br>\n"
+"                    Tags: ${', '.join(object.tag_ids.mapped('name'))}<br>\n"
+"                    Remaining Amount in Wallet <b>${format_amount(object."
+"wallet_id.company_id.currency_id.compute(\n"
+"                      object.partner_id.wallet_credit, object.env['res."
+"users'].search([('partner_id','=',object.partner_id.id)]).company_id."
+"currency_id), object.env['res.users'].search([('partner_id','=',object."
+"partner_id.id)]).company_id.currency_id)}\n"
+"                    <br>\n"
+"                    Regards<br>\n"
+"                    ${object.env.user.name}\n"
+"                \n"
+"            "
+msgstr ""
+"\n"
+"                \n"
+"                    <b>${object.partner_id.name},</b> 您好<br><br>\n"
+"                    您的錢包被扣款金額 <b>${format_amount(object.currency_id."
+"round(object.amount), object.currency_id)}\n"
+"                    </b><br>\n"
+"                    標籤: ${', '.join(object.tag_ids.mapped('name'))}<br>\n"
+"                    錢包中的剩餘金額 <b>${format_amount(object.wallet_id."
+"company_id.currency_id.compute(\n"
+"                      object.partner_id.wallet_credit, object.env['res."
+"users'].search([('partner_id','=',object.partner_id.id)]).company_id."
+"currency_id), object.env['res.users'].search([('partner_id','=',object."
+"partner_id.id)]).company_id.currency_id)}\n"
+"                    <br>\n"
+"                    敬啓<br>\n"
+"                    ${object.env.user.name}\n"
+"                \n"
+"            "
+
+#. module: odoo_e_wallet
+#: model:mail.template,body_html:odoo_e_wallet.website_wallet_mail_debit_template
+msgid ""
+"\n"
+"                \n"
+"                    Dear <b>${object.partner_id.name},</b><br><br>\n"
+"                    Your wallet transaction is accepted by ${object.env.user."
+"company_id.name}\n"
+"                    Wallet Debited with amount <b>${format_amount(object."
+"currency_id.round(object.amount), object.currency_id}\n"
+"                    <span>&asymp;</span>${format_amount(object.total_amount, "
+"object.currency_id}\n"
+"                   </b><br>\n"
+"                    Tags: ${', '.join(object.tag_ids.mapped('name'))}<br>\n"
+"                    <p>Sale Orders:<b>${', '.join(object.sale_order_line_ids."
+"mapped('product_id').mapped('name'))}</b><br>\n"
+"                    Remaining Amount in Wallet <b>${format_amount(object."
+"wallet_id.company_id.currency_id.compute(\n"
+"                      object.partner_id.wallet_credit, object.env['res."
+"users'].search([('partner_id','=',object.partner_id.id)]).company_id."
+"currency_id), object.env['res.users'].search([('partner_id','=',object."
+"partner_id.id)]).company_id.currency_id) </b><br><br>\n"
+"                    <br>\n"
+"                    Regards<br>\n"
+"                    ${object.env.user.name}\n"
+"                \n"
+"            "
+msgstr ""
+"\n"
+"                \n"
+"                    <b>${object.partner_id.name},</b>您好<br><br>\n"
+"                    你的錢包交易被 ${object.env.user.company_id.name}接受\n"
+"                    錢包增加金額 <b>${format_amount(object.currency_id."
+"round(object.amount), object.currency_id}\n"
+"                    <span>&asymp;</span>${format_amount(object.total_amount, "
+"object.currency_id}\n"
+"                   </b><br>\n"
+"                    標籤: ${', '.join(object.tag_ids.mapped('name'))}<br>\n"
+"                    <p>銷售訂單:<b>${', '.join(object.sale_order_line_ids."
+"mapped('product_id').mapped('name'))}</b><br>\n"
+"                   錢包中的剩餘金額<b>${format_amount(object.wallet_id."
+"company_id.currency_id.compute(\n"
+"                      object.partner_id.wallet_credit, object.env['res."
+"users'].search([('partner_id','=',object.partner_id.id)]).company_id."
+"currency_id), object.env['res.users'].search([('partner_id','=',object."
+"partner_id.id)]).company_id.currency_id) </b><br><br>\n"
+"                    <br>\n"
+"                    敬啓<br>\n"
+"                    ${object.env.user.name}\n"
+"                \n"
+"            "
+
+#. module: odoo_e_wallet
+#: model:mail.template,subject:odoo_e_wallet.website_wallet_mail_credit_template
+#: model:mail.template,subject:odoo_e_wallet.website_wallet_mail_debit_template
+#: model:mail.template,subject:odoo_e_wallet.website_wallet_mail_manual_debit_template
+msgid "${' '.join(object.tag_ids.mapped('name'))}"
+msgstr ""
+
+#. module: odoo_e_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.inherit_website_sale_payment
+msgid "<b class=\"total-w-text\">Your current E-Wallet balance is</b>"
+msgstr "<b class=\"total-w-text\">您目前的電子錢包餘額是</b>"
+
+#. module: odoo_e_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.inherit_website_sale_payment
+msgid "<b>Pay Using E-Wallet</b>"
+msgstr "<b>使用電子錢包付款</b>"
+
+#. module: odoo_e_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.wk_wallet_amount_total
+msgid "<b>Total:</b>"
+msgstr "<b> 合計: </b>"
+
+#. module: odoo_e_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.main_wallet
+msgid "<i class=\"fa fa-check\"/> Credit"
+msgstr "<i class=\"fa fa-check\"/>存款"
+
+#. module: odoo_e_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.main_wallet
+msgid "<i class=\"fa fa-check\"/> Done"
+msgstr "<i class=\"fa fa-check\"/>完成"
+
+#. module: odoo_e_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.main_wallet
+msgid "<i class=\"fa fa-check\"/>Refunded"
+msgstr "<i class=\"fa fa-check\"/>退還"
+
+#. module: odoo_e_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.main_wallet
+msgid "<i class=\"fa fa-remove\"/> Debit"
+msgstr "<i class=\"fa fa-check\"/>扣款"
+
+#. module: odoo_e_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.main_wallet
+msgid "<i class=\"fa fa-remove\"/> Draft"
+msgstr "<i class=\"fa fa-check\"/>草稿"
+
+#. module: odoo_e_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.main_wallet
+msgid "<i class=\"fa fa-remove\"/>Cancelled"
+msgstr "<i class=\"fa fa-remove\"/>取消"
+
+#. module: odoo_e_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.search
+msgid "<span>Sort By:</span>"
+msgstr "<span>排序:</span>"
+
+#. module: odoo_e_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.inherit_wallet_report_invoice_document
+msgid ""
+"<strong>E-Wallet:</strong>\n"
+"                <span>(-)</span>"
+msgstr ""
+"<strong>電子錢包:</strong>\n"
+"                <span>(-)</span>"
+
+#. module: odoo_e_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.inherit_wallet_report_saleorder_document
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.inherit_wallet_sale_order_portal_content
+msgid "<strong>E-Wallet</strong>"
+msgstr "<strong>電子錢包</strong>"
+
+#. module: odoo_e_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.inherit_wallet_payment
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.wallet_transaction_wallet
+msgid "<strong>Total:</strong>"
+msgstr "<strong>合計:</strong>"
+
+#. module: odoo_e_wallet
+#: code:addons/odoo_e_wallet/models/inherit_sale.py:0
+#, python-format
+msgid "A journal must be specified of the acquirer %s."
+msgstr "必須指定收單方的日記帳 %s."
+
+#. module: odoo_e_wallet
+#: code:addons/odoo_e_wallet/models/inherit_sale.py:0
+#, python-format
+msgid "A payment acquirer is required to create a transaction."
+msgstr "支付收單機構需要建立交易。"
+
+#. module: odoo_e_wallet
+#: code:addons/odoo_e_wallet/models/inherit_sale.py:0
+#, python-format
+msgid ""
+"A transaction can't be linked to sales orders having different currencies."
+msgstr "交易記錄不能連結到具有不同貨幣的銷售訂單。"
+
+#. module: odoo_e_wallet
+#: code:addons/odoo_e_wallet/models/inherit_sale.py:0
+#, python-format
+msgid ""
+"A transaction can't be linked to sales orders having different partners."
+msgstr "交易記錄不能連結到具有不同合作夥伴的銷售訂單。"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__message_needaction
+msgid "Action Needed"
+msgstr "所需動作"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_e_wallet__active
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transaction_tags__active
+msgid "Active"
+msgstr "動作"
+
+#. module: odoo_e_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.main_wallet
+msgid "Amount In Your"
+msgstr "您的金額"
+
+#. module: odoo_e_wallet
+#: code:addons/odoo_e_wallet/models/payment_acquirer.py:0
+#, python-format
+msgid "Amount Mismatch (%s)"
+msgstr "金額不匹配 (%s)"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__message_attachment_count
+msgid "Attachment Count"
+msgstr "附件數"
+
+#. module: odoo_e_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.transaction_history_view_form
+msgid "Cancel"
+msgstr "取消"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields.selection,name:odoo_e_wallet.selection__website_transactions__state__cancelled
+msgid "Cancelled"
+msgstr "己消取"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_e_wallet__order_cancelled_tag
+msgid "Cancelled Sale Order Tag"
+msgstr "取消的銷售訂單標籤"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_e_wallet__company_id
+msgid "Company"
+msgstr "公司"
+
+#. module: odoo_e_wallet
+#: model:ir.model,name:odoo_e_wallet.model_res_partner
+msgid "Contact"
+msgstr "聯繫"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_e_wallet__create_uid
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transaction_tags__create_uid
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__create_uid
+msgid "Created by"
+msgstr "建立者"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_e_wallet__create_date
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transaction_tags__create_date
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__create_date
+msgid "Created on"
+msgstr "建立日期"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields.selection,name:odoo_e_wallet.selection__website_transaction_tags__txn_type__credit
+#: model:ir.model.fields.selection,name:odoo_e_wallet.selection__website_transactions__txn_type__credit
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.transaction_history_view_form
+msgid "Credit"
+msgstr "存款"
+
+#. module: odoo_e_wallet
+#: code:addons/odoo_e_wallet/controller/main.py:0
+#, python-format
+msgid "Credit/Debit"
+msgstr "存款/扣款"
+
+#. module: odoo_e_wallet
+#: code:addons/odoo_e_wallet/controller/main.py:0
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__currency_id
+#, python-format
+msgid "Currency"
+msgstr "貨幣"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__partner_id
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.website_transaction_history_search
+msgid "Customer"
+msgstr "客戶"
+
+#. module: odoo_e_wallet
+#: model:ir.ui.menu,name:odoo_e_wallet.website_customers
+msgid "Customers"
+msgstr "客戶"
+
+#. module: odoo_e_wallet
+#: code:addons/odoo_e_wallet/controller/main.py:0
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.main_wallet
+#, python-format
+msgid "Date"
+msgstr "日期"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields.selection,name:odoo_e_wallet.selection__website_transaction_tags__txn_type__debit
+#: model:ir.model.fields.selection,name:odoo_e_wallet.selection__website_transactions__txn_type__debit
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.transaction_history_view_form
+msgid "Debit"
+msgstr "扣款"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,help:odoo_e_wallet.field_website_e_wallet__order_cancelled_tag
+msgid "Default Cancelled Sale Order Wallet Money Tag"
+msgstr "預設已取消的銷售訂單錢包貨幣標籤"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,help:odoo_e_wallet.field_website_e_wallet__order_debit_tag_id
+msgid "Default Sale Order Transaction Tag"
+msgstr "預設銷售訂單交易標籤"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_e_wallet__display_name
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transaction_tags__display_name
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__display_name
+msgid "Display Name"
+msgstr "顯示名稱"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,help:odoo_e_wallet.field_website_transactions__total_amount
+msgid ""
+"Display the converted amount from the currency used for transaction to the "
+"current wallet company currency"
+msgstr "顯示從用於交易的貨幣到當前錢包公司貨幣的轉換金額"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields.selection,name:odoo_e_wallet.selection__website_transactions__state__done
+msgid "Done"
+msgstr "完成"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields.selection,name:odoo_e_wallet.selection__website_transactions__state__draft
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.transaction_history_view_form
+msgid "Draft"
+msgstr "草稿"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__wallet_id
+#: model:ir.model.fields.selection,name:odoo_e_wallet.selection__payment_acquirer__provider__e_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.wallet_transaction_wallet
+#: model:payment.acquirer,name:odoo_e_wallet.payment_acquirer_wallet
+msgid "E-Wallet"
+msgstr "電子錢包"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__amount
+msgid "E-Wallet Amount"
+msgstr "電子錢包金額"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_e_wallet__wallet_transaction_ids
+msgid "E-Wallet Transactions"
+msgstr "電子錢包交易"
+
+#. module: odoo_e_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.transaction_history_view_form
+msgid "E-Wallet amount"
+msgstr "電子錢包金額"
+
+#. module: odoo_e_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.inherit_wallet_payment
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.wallet_customers_view_kanban
+msgid "E-Wallet:"
+msgstr "電子錢包:"
+
+#. module: odoo_e_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.wk_wallet_amount
+msgid "E-wallet:"
+msgstr "電子錢包:"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields.selection,name:odoo_e_wallet.selection__website_transactions__state__error
+msgid "Error"
+msgstr "錯誤"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__message_follower_ids
+msgid "Followers"
+msgstr "關注者"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__message_channel_ids
+msgid "Followers (Channels)"
+msgstr "關注者(頻道)"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "關注者(夥伴)"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_e_wallet__id
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transaction_tags__id
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__id
+msgid "ID"
+msgstr "ID"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,help:odoo_e_wallet.field_website_transactions__message_needaction
+#: model:ir.model.fields,help:odoo_e_wallet.field_website_transactions__message_unread
+msgid "If checked, new messages require your attention."
+msgstr "如果勾選，有新的消息需要您關注。"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,help:odoo_e_wallet.field_website_transactions__message_has_error
+#: model:ir.model.fields,help:odoo_e_wallet.field_website_transactions__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "如果勾選了，有些消息會出現遞送錯誤。"
+
+#. module: odoo_e_wallet
+#: code:addons/odoo_e_wallet/models/inherit_sale.py:0
+#, python-format
+msgid "Invalid token found! Token acquirer %s != %s"
+msgstr "發現無效token ! token 收單者為 %s != %s"
+
+#. module: odoo_e_wallet
+#: code:addons/odoo_e_wallet/models/inherit_sale.py:0
+#, python-format
+msgid "Invalid token found! Token partner %s != %s"
+msgstr "發現無效token! Token 夥伴 %s != %s"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__message_is_follower
+msgid "Is Follower"
+msgstr "是關注者"
+
+#. module: odoo_e_wallet
+#: model:ir.model,name:odoo_e_wallet.model_account_move
+msgid "Journal Entries"
+msgstr "日記條目"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_e_wallet____last_update
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transaction_tags____last_update
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions____last_update
+msgid "Last Modified on"
+msgstr "最後修改時間"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_e_wallet__write_uid
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transaction_tags__write_uid
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__write_uid
+msgid "Last Updated by"
+msgstr "最後更新者"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_e_wallet__write_date
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transaction_tags__write_date
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__write_date
+msgid "Last Updated on"
+msgstr "最後更新時間"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "主要附件"
+
+#. module: odoo_e_wallet
+#: model:res.groups,name:odoo_e_wallet.website_wallet_group_manager
+msgid "Manager"
+msgstr ""
+"管理員\n"
+"\t"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields.selection,name:odoo_e_wallet.selection__website_transactions__reference__manual
+msgid "Manual"
+msgstr "手冊"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__message_has_error
+msgid "Message Delivery error"
+msgstr "訊傳遞錯誤"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__message_ids
+msgid "Messages"
+msgstr "訊息"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_e_wallet__name
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transaction_tags__name
+msgid "Name"
+msgstr "名稱"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__message_needaction_counter
+msgid "Number of Actions"
+msgstr "行動次數"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__message_has_error_counter
+msgid "Number of errors"
+msgstr "錯誤數"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,help:odoo_e_wallet.field_website_transactions__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "需要採取措施的消息數"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,help:odoo_e_wallet.field_website_transactions__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "傳遞錯誤的訊息數"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,help:odoo_e_wallet.field_website_transactions__message_unread_counter
+msgid "Number of unread messages"
+msgstr "未讀訊息數"
+
+#. module: odoo_e_wallet
+#: code:addons/odoo_e_wallet/models/payment_acquirer.py:0
+#, python-format
+msgid "Pay Now"
+msgstr "立即付款"
+
+#. module: odoo_e_wallet
+#: model:ir.model,name:odoo_e_wallet.model_payment_acquirer
+msgid "Payment Acquirer"
+msgstr "付款收款人"
+
+#. module: odoo_e_wallet
+#: model:ir.model,name:odoo_e_wallet.model_payment_transaction
+msgid "Payment Transaction"
+msgstr "付款交易"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_payment_acquirer__provider
+msgid "Provider"
+msgstr "提供者"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__reference
+msgid "Reference"
+msgstr "參考"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields.selection,name:odoo_e_wallet.selection__website_transactions__state__refunded
+msgid "Refunded"
+msgstr "已退款"
+
+#. module: odoo_e_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.search
+msgid "Reset"
+msgstr "重置"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "SMS 發送錯誤"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__sale_order_id
+#: model:ir.model.fields.selection,name:odoo_e_wallet.selection__website_transactions__reference__sale_order
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.search
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.transaction_history_view_form
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.website_transaction_history_search
+msgid "Sale Order"
+msgstr "銷售訂單"
+
+#. module: odoo_e_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.main_wallet
+msgid "Sale Order ID"
+msgstr "銷售訂單ID"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__sale_order_line_ids
+msgid "Sale Order Line"
+msgstr "銷售明細"
+
+#. module: odoo_e_wallet
+#: model:ir.actions.act_window,name:odoo_e_wallet.sale_order_action
+msgid "Sale_Order"
+msgstr "銷售訂單"
+
+#. module: odoo_e_wallet
+#: model:ir.model,name:odoo_e_wallet.model_sale_order
+msgid "Sales Order"
+msgstr "銷售訂單"
+
+#. module: odoo_e_wallet
+#: model:ir.model,name:odoo_e_wallet.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "銷售明細"
+
+#. module: odoo_e_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.search
+msgid "Search"
+msgstr "查詢"
+
+#. module: odoo_e_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.website_transaction_history_search
+msgid "Search Transaction History"
+msgstr "查詢交易記錄"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_e_wallet__show_transactions
+msgid "Show Transactions"
+msgstr "顯示交易記錄"
+
+#. module: odoo_e_wallet
+#: code:addons/odoo_e_wallet/controller/main.py:0
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__state
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.main_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.website_transaction_history_search
+#, python-format
+msgid "State"
+msgstr "狀態"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__tag_ids
+msgid "Tag"
+msgstr "標籤"
+
+#. module: odoo_e_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.main_wallet
+msgid "Tags"
+msgstr "標籤"
+
+#. module: odoo_e_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.inherit_sale_view_order_form
+msgid "Terms and conditions..."
+msgstr "條款和條件..."
+
+#. module: odoo_e_wallet
+#: code:addons/odoo_e_wallet/models/payment_acquirer.py:0
+#, python-format
+msgid ""
+"The order was not confirmed despite response from the acquirer (%s): order "
+"total is %r but acquirer replied with %r."
+msgstr ""
+"儘管收款人做出了回應，但訂單仍未確認 (%s): 訂單總數為 %r 但是收款人回覆 %r."
+
+#. module: odoo_e_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.main_wallet
+msgid "There are currently no transactions."
+msgstr "當前沒有交易。"
+
+#. module: odoo_e_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.main_wallet
+msgid "Total"
+msgstr "合計"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__total_amount
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.transaction_history_view_form
+msgid "Total Converted Amount"
+msgstr "總轉換金額"
+
+#. module: odoo_e_wallet
+#: model:ir.actions.act_window,name:odoo_e_wallet.website_transaction_history_action
+#: model:ir.actions.act_window,name:odoo_e_wallet.website_transaction_history_action_2
+msgid "Transaction"
+msgstr "交易"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__transaction_datetime
+msgid "Transaction Date"
+msgstr "交易日期"
+
+#. module: odoo_e_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.main_wallet
+msgid "Transaction ID"
+msgstr "交易ID"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__transaction_id
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.search
+msgid "Transaction Id"
+msgstr "交易ID"
+
+#. module: odoo_e_wallet
+#: model:ir.actions.act_window,name:odoo_e_wallet.website_wallet_transaction_action
+#: model:ir.ui.menu,name:odoo_e_wallet.website_wallet_transaction_tags
+msgid "Transaction Tags"
+msgstr "交易標籤"
+
+#. module: odoo_e_wallet
+#: model:ir.ui.menu,name:odoo_e_wallet.website_transaction_history
+msgid "Transactions"
+msgstr "交易記錄"
+
+#. module: odoo_e_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.website_transaction_history_search
+msgid "Txn Id"
+msgstr "Txn Id"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transaction_tags__txn_type
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__txn_type
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.main_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.website_transaction_history_search
+msgid "Type"
+msgstr "類型"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__message_unread
+msgid "Unread Messages"
+msgstr "未讀訊息"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "未讀訊息數"
+
+#. module: odoo_e_wallet
+#: code:addons/odoo_e_wallet/controller/main.py:0
+#: model:ir.module.category,name:odoo_e_wallet.website_wallet_category
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.inherit_portal_my_home
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.inherit_website_sale_payment
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.website_transaction_history_search
+#, python-format
+msgid "Wallet"
+msgstr "錢包"
+
+#. module: odoo_e_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.wallet_customers_view_kanban
+msgid "Wallet Customers kanban"
+msgstr "錢包客戶看板"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_sale_order__wallet_debit
+msgid "Wallet Debit"
+msgstr "錢包扣款"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_e_wallet__image
+msgid "Wallet Image"
+msgstr "錢包圖片"
+
+#. module: odoo_e_wallet
+#: model_terms:ir.ui.view,arch_db:odoo_e_wallet.main_wallet
+msgid "Wallet Name"
+msgstr "錢包名稱"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_sale_order_line__wallet_transaction_id
+msgid "Wallet Transaction"
+msgstr "交易標籤"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_sale_order__wallet_txn_id
+msgid "Wallet Transaction Id"
+msgstr "交易ID"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_res_partner__wallet_credit
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_res_users__wallet_credit
+msgid "Wallet balance"
+msgstr "錢包餘額"
+
+#. module: odoo_e_wallet
+#: code:addons/odoo_e_wallet/models/payment_acquirer.py:0
+#, python-format
+msgid "Wallet: received data with missing reference (%s)"
+msgstr "電子錢包：收到的資料缺少參考 (%s)"
+
+#. module: odoo_e_wallet
+#: model:ir.model,name:odoo_e_wallet.model_website
+msgid "Website"
+msgstr "網站"
+
+#. module: odoo_e_wallet
+#: model:ir.actions.act_window,name:odoo_e_wallet.website_customers_action
+msgid "Website Customers"
+msgstr "網站客戶"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_e_wallet__order_debit_tag_id
+msgid "Website Debit Tag"
+msgstr "網站 扣款 標籤"
+
+#. module: odoo_e_wallet
+#: model:ir.actions.act_window,name:odoo_e_wallet.website_e_wallet_action
+#: model:ir.ui.menu,name:odoo_e_wallet.website_e_wallet
+msgid "Website E-Wallet"
+msgstr "電子錢包"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__website_message_ids
+msgid "Website Messages"
+msgstr "網站訊息"
+
+#. module: odoo_e_wallet
+#: model:ir.ui.menu,name:odoo_e_wallet.website_wallet_main_menu
+msgid "Website Wallet"
+msgstr "電子錢包"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,help:odoo_e_wallet.field_website_transactions__website_message_ids
+msgid "Website communication history"
+msgstr "網站交流歷史"
+
+#. module: odoo_e_wallet
+#: model:ir.model.fields,field_description:odoo_e_wallet.field_website_transactions__wallet_currency_id
+msgid "wallet currency id"
+msgstr "錢包貨幣編號"
+
+#. module: odoo_e_wallet
+#: model:ir.model,name:odoo_e_wallet.model_website_e_wallet
+msgid "website e wallet model"
+msgstr "電子錢包模組"
+
+#. module: odoo_e_wallet
+#: model:ir.model,name:odoo_e_wallet.model_website_transaction_tags
+msgid "website transaction tags model"
+msgstr "電子錢包標籤模組"
+
+#. module: odoo_e_wallet
+#: model:ir.model,name:odoo_e_wallet.model_website_transactions
+msgid "website transactions model"
+msgstr "電子錢包交易明細模組"
+
+#. module: odoo_e_wallet
+#: model_terms:payment.acquirer,done_msg:odoo_e_wallet.payment_acquirer_wallet
+msgid "交易完成，您的線上付款已成功處理完畢。 感謝您的訂購。"
+msgstr "交易完成，您的線上付款已成功處理完畢。 感謝您的訂購。"
+
+#. module: odoo_e_wallet
+#: model_terms:payment.acquirer,pending_msg:odoo_e_wallet.payment_acquirer_wallet
+msgid "您的付款已成功處理，但正在等待批准。"
+msgstr "您的付款已成功處理，但正在等待批准。"
+
+#. module: odoo_e_wallet
+#: model_terms:payment.acquirer,auth_msg:odoo_e_wallet.payment_acquirer_wallet
+msgid "您的付款已獲授權。"
+msgstr "您的付款已獲授權。"
+
+#. module: odoo_e_wallet
+#: model_terms:payment.acquirer,cancel_msg:odoo_e_wallet.payment_acquirer_wallet
+msgid "您的付款已被取消。"
+msgstr "您的付款已被取消。"

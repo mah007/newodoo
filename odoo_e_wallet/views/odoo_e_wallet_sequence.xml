@@ -1,0 +1,13 @@
+<odoo>
+    <data noupdate="1">
+      <!-- Copyright (c) 2017-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+      <!-- See LICENSE file for full copyright and licensing details. -->
+        <record id="website_transaction_sequence" model="ir.sequence">
+            <field name="name">Website_Transaction_Sequence</field>
+            <field name="code">website.transactions.sequence</field>
+            <field name="prefix">TS</field>
+            <field name="padding">8</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,16 @@
+<odoo>
+  <data noupdate="1">
+    <!-- Copyright (c) 2017-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+    <!-- See LICENSE URL <https://store.webkul.com/license.html/> for full copyright and licensing details. -->
+    <record id="transaction_1" model="website.transactions">
+      <field name="state">done</field>
+      <field name="txn_type">credit</field>
+      <field name="partner_id" ref="base.partner_admin"/>
+      <field name="reference">manual</field>
+      <field name="amount" eval="16000"/>
+      <field name="tag_ids" eval="[(6,0,[ref('odoo_e_wallet.bonus'),ref('odoo_e_wallet.new_year_bonus')])]"/>
+      <field name="wallet_id" ref="odoo_e_wallet.website_wallet"/>
+    </record>
+
+  </data>
+</odoo>

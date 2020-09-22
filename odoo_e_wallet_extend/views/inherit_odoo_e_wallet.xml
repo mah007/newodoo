@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="inherit_transaction_history_view_form_wallet_extend" model="ir.ui.view">
+            <field name="name">inherit_transaction_history_view_form_wallet_extend</field>
+            <field name="model">website.transactions</field>
+            <field name="inherit_id" ref="odoo_e_wallet.transaction_history_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='wallet_id']" position="attributes">
+                    <attribute name="readonly">False</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
