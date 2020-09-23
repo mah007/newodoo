@@ -1,0 +1,135 @@
+<odoo>
+    <data>
+        <record id="view_move_picking_form" model="ir.ui.view">
+            <field name="name">stock.move.picking.form</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_form"/>
+            <field name="arch" type="xml">
+                <field name="location_dest_id" position="after">
+                    <field name="analytic_account_id"/>
+                       <field name="tag_ids" widget="many2many_tags"/>
+                </field>
+            </field>
+        </record>
+
+       <!-- <record id="view_move_picking_tree" model="ir.ui.view">
+            <field name="name">stock.move.picking.tree</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_tree"/>
+            <field name="arch" type="xml">
+                <field name="product_uom" position="after">
+                    <field name="analytic_account_id"/>
+                     <field name="tag_ids" widget="many2many_tags"/>
+                </field>
+            </field>
+        </record>-->
+
+        <record id="view_move_tree" model="ir.ui.view">
+            <field name="name">stock.move.tree</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_tree"/>
+            <field name="arch" type="xml">
+                <field name='location_dest_id' position="after">
+                    <field name="analytic_account_id"/>
+                    <field name="tag_ids" widget="many2many_tags"/>
+                </field>
+            </field>
+        </record>
+        <record id="stock_move_tree" model="ir.ui.view">
+            <field name="name">Stock Moves</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.stock_move_tree"/>
+            <field name="arch" type="xml">
+                <field name='location_dest_id' position="after">
+                    <field name="analytic_account_id"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_move_tree_receipt_picking" model="ir.ui.view">
+            <field name="name">stock.move.tree2</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_tree_receipt_picking"/>
+            <field name="arch" type="xml">
+                <field name='date' position="before">
+                    <field name="analytic_account_id"/>
+                       <field name="tag_ids" widget="many2many_tags"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_move_tree_receipt_picking_board" model="ir.ui.view">
+            <field name="name">stock.move.tree3</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_tree_receipt_picking_board"/>
+            <field name="arch" type="xml">
+                <field name='date' position="before">
+                    <field name="analytic_account_id"/>
+                     <field name="tag_ids" widget="many2many_tags"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_move_form" model="ir.ui.view">
+            <field name="name">stock.move.form</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_form"/>
+            <field name="arch" type="xml">
+                <field name='location_dest_id' position="after">
+                    <field name="analytic_account_id"/>
+                       <field name="tag_ids" widget="many2many_tags"/>
+                </field>
+            </field>
+        </record>
+
+		<record id="view_move_form_inherit_ex" model="ir.ui.view">
+            <field name="name">stock.move.form.picking.ex</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_confirm']" position="replace" attrs="{'invisible': [('account_available','=',True)]}'">
+                    <button name="action_confirm"
+                        attrs="{'invisible': ['|',('account_available','=',True),('state', 'in', ['holding','waiting','confirmed','assigned','done','cancel'])]}"
+                        string="Mark as Todo" type="object" class="oe_highlight" groups="base.group_user"/>
+                </xpath>
+
+                <xpath expr="//button[@name='action_confirm']" position="after" attrs="{'invisible': [('account_available','=',False)]}'">
+                    <button name="action_confirm"
+                        attrs="{'invisible': ['|',('account_available','=',False),('state', 'in', ['draft','holding','waiting','confirmed','assigned','done','cancel'])]}"
+                        string="Mark as Todo" type="object" class="oe_highlight" groups="base.group_user"/>
+
+
+                    <button name="waiting_to_ready" attrs="{'invisible': ['|',('account_available','=',False),('state', 'in', ['holding','approved','waiting','confirmed','assigned','done','cancel'])]}" type="object" class="oe_highlight" string="waiting for approval"/>
+
+                    <button name="waiting_to_approved" attrs="{'invisible': ['|',('account_available','=',False),('state', 'in', ['draft','approved','waiting','confirmed','assigned','done','cancel'])]}" groups="bi_picking_analytic.group_stock_picking" type="object" class="oe_highlight" string="Approved"/>
+
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="account_available" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//field[@name='state']" position="replace">
+                    <field name="state" widget="statusbar" statusbar_visible="draft,holding,approved,confirmed,partially_available,assigned,done" />
+                </xpath>
+                <xpath expr="//field[@name='move_ids_without_package']/tree//field[@name='location_id']" position="after">
+                    <!--  -->
+                    <field name="analytic_account_id"/>
+                  <field name="tag_ids" widget="many2many_tags"/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="stock_picking_type_form_inherit_ex" model="ir.ui.view">
+            <field name="name">stock.picking.type.form.picking.ex</field>
+            <field name="model">stock.picking.type</field>
+            <field name="inherit_id" ref="stock.view_picking_type_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='warehouse_id']" position="after">
+                    <field name="project_id"/>
+                  <field name="account_id"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
